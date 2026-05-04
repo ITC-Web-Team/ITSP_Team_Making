@@ -1,20 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 import IdeaCard from "@/components/IdeaCard";
-import { cookies } from "next/headers";
+
 export const dynamic = "force-dynamic";
 
-
 export default async function Home() {
- const cookieStore = await cookies(); 
-  const user = cookieStore.get("user");  
   const ideas = await prisma.idea.findMany({
     orderBy: { createdAt: "desc" },
   });
 
   return (
     <>
-       <Navbar isLoggedIn={!!user} />
+      <Navbar />
 
       <div className="p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

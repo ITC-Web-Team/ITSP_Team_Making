@@ -1,46 +1,37 @@
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+"use client";
 
-export const dynamic = "force-dynamic";
+import { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
-export default async function Callback({ searchParams }) {
-  const sessionKey = searchParams?.accessid;
+export default function Callback() {
+  const params = useSearchParams();
+  const router = useRouter();
 
-  if (!sessionKey) {
-    return <div className="text-white p-6">Invalid login</div>;
-  }
+  useEffect(() => {
+    const sessionKey = params.get("accessid");
 
-  try {
-    // Fetch user data from SSO
-    const res = await fetch(
-      "https://sso.tech-iitb.org/project/getuserdata",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: sessionKey }),
-        cache: "no-store",
-      }
-    );
+    if (!sessionKey) return;
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch user");
+    async function fetchUser() {
+      const res = await fetch(
+        "https://sso.tech-iitb.org/project/getuserdata",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: sessionKey }),
+        }
+      );
+
+      const user = await res.json();
+
+      // store in browser
+      localStorage.setItem("user", JSON.stringify(user));
+
+      router.push("/add");
     }
 
-    const user = await res.json();
+    fetchUser();
+  }, [params, router]);
 
-    // Store user in cookie
-    cookies().set("user", JSON.stringify(user), {
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax",
-      secure: true, // IMPORTANT for production (HTTPS)
-    });
-
-    // redirect to add idea page (better UX)
-    redirect("/add");
-
-  } catch (err) {
-    console.error(err);
-    return <div className="text-white p-6">Login failed</div>;
-  }
+  return <div className="text-white p-6">Logging in...</div>;
 }

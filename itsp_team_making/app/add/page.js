@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AddIdeaPage() {
@@ -14,12 +14,40 @@ export default function AddIdeaPage() {
 
   const router = useRouter();
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    // prefill contact
+    setForm((prev) => ({
+      ...prev,
+      contact: user.contact || "",
+    }));
+  }, [router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      alert("Please login first");
+      router.push("/login");
+      return;
+    }
+
     const res = await fetch("/api/ideas", {
       method: "POST",
-      body: JSON.stringify(form),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...form,
+        user,
+      }),
     });
 
     if (res.ok) {
@@ -50,14 +78,14 @@ export default function AddIdeaPage() {
         />
 
         <input
-          placeholder="Flair (AI, Web, etc.)"
+          placeholder="Flair"
           className="w-full p-2 rounded bg-black border border-gray-700"
           onChange={(e) => setForm({ ...form, flair: e.target.value })}
         />
 
         <input
           placeholder="Contact"
-          type="number"
+          value={form.contact}
           className="w-full p-2 rounded bg-black border border-gray-700"
           onChange={(e) => setForm({ ...form, contact: e.target.value })}
         />
