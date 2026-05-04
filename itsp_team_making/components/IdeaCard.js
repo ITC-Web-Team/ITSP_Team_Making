@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function IdeaCard({ idea }) {
   return (
   <Link href={`/ideas/${idea.id}`}>
