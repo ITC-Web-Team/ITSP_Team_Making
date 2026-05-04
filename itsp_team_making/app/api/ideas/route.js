@@ -2,9 +2,11 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
+    const body = await req.json(); // ✅ MUST
 
-    if (!body.user || !body.user.ldap) {
+    console.log("BODY RECEIVED:", body);
+
+    if (!body.user) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -15,13 +17,14 @@ export async function POST(req) {
         flair: body.flair,
         Contact: Number(body.contact),
         Private: body.private,
-        user_LDAP: body.user.roll,
+        user_LDAP: body.user.roll, // ✅ correct
       },
     });
-
+    console.log("BODY RECEIVED:", body);
     return Response.json(idea);
   } catch (err) {
     console.error(err);
+
     return Response.json({ error: "Server error" }, { status: 500 });
   }
 }
