@@ -12,21 +12,28 @@ export default function AddIdeaPage() {
     private: false,
   });
 
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+
     if (!user) {
       router.push("/login");
       return;
     }
 
-    // prefill contact
     setForm((prev) => ({
       ...prev,
       contact: user.contact || "",
     }));
+
+    setLoading(false);
   }, [router]);
+
+  if (loading) {
+    return <div className="text-white p-6">Loading...</div>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,21 +46,36 @@ export default function AddIdeaPage() {
       return;
     }
 
-    const res = await fetch("/api/ideas", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...form,
-        user,
-      }),
-    });
+    // 🔥 VALIDATION
+    if (!form.title || !form.text) {
+      alert("Title and Description are required");
+      return;
+    }
 
-    if (res.ok) {
-      router.push("/");
-    } else {
-      alert("Failed to add idea");
+    try {
+      const res = await fetch("/api/ideas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          user,
+        }),
+      });
+
+      const data = await res.json();
+
+      console.log("RESPONSE:", data);
+
+      if (res.ok) {
+        router.replace("/"); // smoother redirect
+      } else {
+        alert(data.error || "Failed to add idea");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
     }
   };
 
@@ -67,32 +89,44 @@ export default function AddIdeaPage() {
 
         <input
           placeholder="Title"
+          value={form.title}
           className="w-full p-2 rounded bg-black border border-gray-700"
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, title: e.target.value })
+          }
         />
 
         <textarea
           placeholder="Description"
+          value={form.text}
           className="w-full p-2 rounded bg-black border border-gray-700"
-          onChange={(e) => setForm({ ...form, text: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, text: e.target.value })
+          }
         />
 
         <input
           placeholder="Flair"
+          value={form.flair}
           className="w-full p-2 rounded bg-black border border-gray-700"
-          onChange={(e) => setForm({ ...form, flair: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, flair: e.target.value })
+          }
         />
 
         <input
           placeholder="Contact"
           value={form.contact}
           className="w-full p-2 rounded bg-black border border-gray-700"
-          onChange={(e) => setForm({ ...form, contact: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, contact: e.target.value })
+          }
         />
 
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
+            checked={form.private}
             onChange={(e) =>
               setForm({ ...form, private: e.target.checked })
             }
