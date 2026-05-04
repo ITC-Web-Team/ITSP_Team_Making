@@ -10,6 +10,8 @@ export default function Callback() {
   useEffect(() => {
     const sessionKey = params.get("accessid");
 
+    console.log("SESSION:", sessionKey);
+
     if (!sessionKey) return;
 
     async function fetchUser() {
@@ -18,16 +20,21 @@ export default function Callback() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: sessionKey }),
+          body: JSON.stringify({ sessionkey: sessionKey }), // ✅ FIXED
         }
       );
 
       const user = await res.json();
 
-      // store in browser
+      console.log("USER:", user);
+
       localStorage.setItem("user", JSON.stringify(user));
 
-      router.push("/add");
+      console.log("STORED:", localStorage.getItem("user"));
+
+      setTimeout(() => {
+        router.push("/add");
+      }, 300);
     }
 
     fetchUser();
