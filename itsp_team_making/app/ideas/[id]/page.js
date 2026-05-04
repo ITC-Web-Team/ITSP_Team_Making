@@ -1,11 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+
 export const dynamic = "force-dynamic";
 
 export default async function IdeaPage({ params }) {
+  const { id } = await params; 
+
   const idea = await prisma.idea.findUnique({
-    where: { id: Number(params.id) },
+    where: { id: Number(id) },
   });
 
   if (!idea) return notFound();
