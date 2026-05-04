@@ -20,7 +20,7 @@ export async function POST(req) {
         // FIXED names (match schema exactly)
         contact: body.contact ? Number(body.contact) : 0,
         isPrivate: Boolean(body.private),
-        user_Ldap: body.user.roll,
+        userLdap: body.user.roll,
       },
     });
 
