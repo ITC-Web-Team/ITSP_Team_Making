@@ -5,7 +5,7 @@ const NEXT_PUBLIC_PROJECT_ID  = process.env.NEXT_PUBLIC_PROJECT_ID ;
 export default function LoginButton() {
   const handleLogin = () => {
     window.location.href = 
-      "http://sso.tech-iitb.org/project/7eb1de06-b2db-4a1f-8dce-6f6ea1b608ad/ssocall/"
+      "https://sso.tech-iitb.org/project/6f88d04e-58cc-44ff-a827-083b78c7d854/ssocall/"
 ;
   };
 
