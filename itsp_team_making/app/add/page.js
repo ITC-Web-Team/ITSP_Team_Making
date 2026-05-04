@@ -18,11 +18,6 @@ export default function AddIdeaPage() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user) {
-      router.push("/login");
-      return;
-    }
-
     setForm((prev) => ({
       ...prev,
       contact: user.contact || "",
@@ -46,7 +41,7 @@ export default function AddIdeaPage() {
       return;
     }
 
-    // 🔥 VALIDATION
+    //  VALIDATION
     if (!form.title || !form.text) {
       alert("Title and Description are required");
       return;
