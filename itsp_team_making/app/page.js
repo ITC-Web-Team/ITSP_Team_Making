@@ -6,7 +6,8 @@ export const dynamic = "force-dynamic";
 
 
 export default async function Home() {
-const user = cookies().get("user");
+ const cookieStore = await cookies(); 
+  const user = cookieStore.get("user");  
   const ideas = await prisma.idea.findMany({
     orderBy: { createdAt: "desc" },
   });
