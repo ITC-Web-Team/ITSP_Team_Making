@@ -5,11 +5,6 @@ export async function POST(req) {
     const body = await req.json(); // ✅ MUST
 
     console.log("BODY RECEIVED:", body);
-
-    if (!body.user) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const idea = await prisma.idea.create({
       data: {
         title: body.title,
