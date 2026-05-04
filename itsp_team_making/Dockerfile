@@ -1,13 +1,21 @@
 # syntax=docker/dockerfile:1
 
-FROM node:20.19-alpine AS deps
+FROM node:20.19-bullseye-slim AS deps
 WORKDIR /app
+
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends openssl ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
 
 COPY itsp_team_making/package.json itsp_team_making/package-lock.json ./
 RUN npm install --no-audit --no-fund
 
-FROM node:20.19-alpine AS builder
+FROM node:20.19-bullseye-slim AS builder
 WORKDIR /app
+
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends openssl ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY itsp_team_making/ .
@@ -17,8 +25,12 @@ COPY prisma.config.ts ./prisma.config.ts
 RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run build
 
-FROM node:20.19-alpine AS runner
+FROM node:20.19-bullseye-slim AS runner
 WORKDIR /app
+
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends openssl ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
 ENV PORT=4736
