@@ -16,11 +16,19 @@ export default function AddIdeaPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const stored = localStorage.getItem("user");
 
+    if (!stored) {
+      router.replace("/login");
+      return;
+    }
+
+    const user = JSON.parse(stored);
+
+    // optional prefill
     setForm((prev) => ({
       ...prev,
-      contact: user.contact || "",
+      contact: user.roll || "",
     }));
 
     setLoading(false);
@@ -33,15 +41,16 @@ export default function AddIdeaPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const stored = localStorage.getItem("user");
 
-    if (!user) {
+    if (!stored) {
       alert("Please login first");
-      router.push("/login");
+      router.replace("/login");
       return;
     }
 
-    //  VALIDATION
+    const user = JSON.parse(stored);
+
     if (!form.title || !form.text) {
       alert("Title and Description are required");
       return;
@@ -64,7 +73,7 @@ export default function AddIdeaPage() {
       console.log("RESPONSE:", data);
 
       if (res.ok) {
-        router.replace("/"); // smoother redirect
+        router.replace("/");
       } else {
         alert(data.error || "Failed to add idea");
       }
