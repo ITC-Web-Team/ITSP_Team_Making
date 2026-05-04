@@ -3,10 +3,12 @@ version: "3.8"
 services:
   web:
     build:
-      context: ./itsp_team_making
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: itsp_team_making/Dockerfile
     container_name: itsp-team-making-web
     restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
       PORT: 4736
     ports:
