@@ -27,7 +27,7 @@ export default function CallbackInner() {
       localStorage.setItem("user", JSON.stringify(user));
 
       setTimeout(() => {
-        router.push("/add");
+        router.push("/");
       }, 300);
     }
 
