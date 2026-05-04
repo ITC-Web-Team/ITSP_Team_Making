@@ -15,7 +15,7 @@ export async function POST(req) {
         flair: body.flair,
         Contact: Number(body.contact),
         Private: body.private,
-        user_LDAP: body.user.ldap,
+        user_LDAP: body.user.roll,
       },
     });
 
