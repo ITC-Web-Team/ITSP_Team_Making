@@ -11,11 +11,11 @@ export async function POST(req) {
                 text: body.text,
                 flair: body.flair,
 
-                contact: body.contact ? Number(body.contact) : 0, // ✅ correct
+                contact: body.contact ? Number(body.contact) : 0, 
 
-                isPrivate: Boolean(body.private), // ✅ correct
+                isPrivate: Boolean(body.private),
 
-                user_Ldap: body.user.roll, // ✅ correct
+                user_Ldap: body.user.roll,
             },
         });
         console.log("BODY RECEIVED:", body);
