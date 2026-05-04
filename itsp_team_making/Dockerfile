@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
 
-FROM node:20-alpine AS deps
+FROM node:20.19-alpine AS deps
 WORKDIR /app
 
 COPY itsp_team_making/package.json itsp_team_making/package-lock.json ./
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
-FROM node:20-alpine AS builder
+FROM node:20.19-alpine AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -17,7 +17,7 @@ COPY prisma.config.ts ./prisma.config.ts
 RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:20.19-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
