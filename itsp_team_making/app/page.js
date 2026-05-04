@@ -1,7 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 import IdeaCard from "@/components/IdeaCard";
+import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
+
 const user = cookies().get("user");
 export default async function Home() {
   const ideas = await prisma.idea.findMany({
