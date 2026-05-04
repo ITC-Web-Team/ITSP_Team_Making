@@ -38,50 +38,42 @@ export default function AddIdeaPage() {
     return <div className="text-white p-6">Loading...</div>;
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const stored = localStorage.getItem("user");
+  const stored = localStorage.getItem("user");
 
-    if (!stored) {
-      alert("Please login first");
-      router.replace("/login");
-      return;
-    }
+  if (!stored) {
+    alert("Not logged in");
+    return;
+  }
 
-    const user = JSON.parse(stored);
+  const user = JSON.parse(stored);
 
-    if (!form.title || !form.text) {
-      alert("Title and Description are required");
-      return;
-    }
-
-    try {
-      const res = await fetch("/api/ideas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...form,
-          user,
-        }),
-      });
-
-      const data = await res.json();
-
-      console.log("RESPONSE:", data);
-
-      if (res.ok) {
-        router.replace("/");
-      } else {
-        alert(data.error || "Failed to add idea");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    }
+  const payload = {
+    ...form,
+    user,
   };
+
+  console.log("PAYLOAD:", payload);
+
+  const res = await fetch("/api/ideas", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+  console.log("RESPONSE:", data);
+
+  if (res.ok) {
+    router.replace("/");
+  } else {
+    alert(data.error);
+  }
+};
 
   return (
     <div className="min-h-screen bg-black text-white flex justify-center items-center">
