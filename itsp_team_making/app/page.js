@@ -4,8 +4,9 @@ import IdeaCard from "@/components/IdeaCard";
 import { cookies } from "next/headers";
 export const dynamic = "force-dynamic";
 
-const user = cookies().get("user");
+
 export default async function Home() {
+const user = cookies().get("user");
   const ideas = await prisma.idea.findMany({
     orderBy: { createdAt: "desc" },
   });
