@@ -4,29 +4,55 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 export default async function IdeaPage({ params }) {
-  const { id } = await params; 
+  const id = Number(params.id);
+
+  if (isNaN(id)) return notFound();
 
   const idea = await prisma.idea.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
 
   if (!idea) return notFound();
 
   return (
-    <div className="p-6 text-white">
-      <h1 className="text-2xl font-bold mb-2">{idea.title}</h1>
+  <>
+  <Navbar/>
+    <div className="min-h-screen bg-gradient-to-b from-[#020617] to-[#0f172a] text-white flex items-center justify-center px-4">
+      
+      <div className="w-full max-w-2xl bg-[#111827]/80 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl p-6 space-y-5">
 
-      <p className="text-gray-400 mb-4">{idea.text}</p>
+        {/* Header */}
+        <div className="flex justify-between items-start">
+          <span className="px-3 py-1 text-xs rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30">
+            {idea.flair}
+          </span>
 
-      <div className="flex gap-4 text-sm text-gray-500">
-        <span>{idea.flair}</span>
-        <span>{idea.user_LDAP}</span>
-        <span>Contact: {idea.Contact}</span>
-      </div>
+          <span className="text-sm text-gray-400">
+            {idea.Private ? "Private" : "Public"}
+          </span>
+        </div>
 
-      <div className="mt-4">
-        {idea.Private ? "Private 🔒" : "Public 🌍"}
+        {/* Title */}
+        <h1 className="text-3xl font-bold leading-tight">
+          {idea.title}
+        </h1>
+
+        {/* Description */}
+        <p className="text-gray-300 text-base leading-relaxed">
+          {idea.text}
+        </p>
+
+        {/* Divider */}
+        <div className="border-t border-gray-800"></div>
+
+        {/* Footer Info */}
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm text-gray-400">
+          <span>Posted by: {idea.user_LDAP}</span>
+          <span>Contact: {idea.Contact}</span>
+        </div>
+
       </div>
     </div>
+    </>
   );
 }

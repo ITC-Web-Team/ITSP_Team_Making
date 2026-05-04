@@ -1,11 +1,11 @@
 "use client";
 
-const PROJECT_ID = process.env.PROJECT_ID;
+const NEXT_PUBLIC_PROJECT_ID  = process.env.NEXT_PUBLIC_PROJECT_ID ;
 
 export default function LoginButton() {
   const handleLogin = () => {
     window.location.href = 
-      `https://sso.tech-iitb.org/project/${PROJECT_ID}/ssocall/`;
+      `https://sso.tech-iitb.org/project/${NEXT_PUBLIC_PROJECT_ID }/ssocall/`;
   };
 
   return (
