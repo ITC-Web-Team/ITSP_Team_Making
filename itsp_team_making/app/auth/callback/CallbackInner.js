@@ -18,7 +18,7 @@ export default function CallbackInner() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionkey: sessionKey }),
+          body: JSON.stringify({ id: sessionKey }),
         }
       );
 
