@@ -1,5 +1,6 @@
 export default function IdeaCard({ idea }) {
   return (
+  <Link href={`/ideas/${idea.id}`}>
     <div className="group relative bg-[#0b0f1a] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300">
       
       {/* gradient border */}
@@ -36,5 +37,6 @@ export default function IdeaCard({ idea }) {
 
       </div>
     </div>
+    </Link>
   );
 }
