@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-[#011c41] text-white px-4 sm:px-6 py-4 shadow-md">
 
-      <div className="flex items-center justify-between">
+      <div className="sm:flex flex items-center justify-between">
         {/* Title */}
         <h1 className="text-2xl sm:text-4xl font-semibold tracking-wide poppins-black">
           ITSP Team Making
