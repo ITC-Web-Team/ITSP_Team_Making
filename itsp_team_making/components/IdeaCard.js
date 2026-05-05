@@ -13,9 +13,9 @@ export default function IdeaCard({ idea }) {
       {/* gradient border */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/60 to-purple-300/60 opacity-0 group-hover:opacity-100 blur-sm transition"></div>
 
-      <div className="relative bg-white p-5 rounded-2xl border-2 border-purple-200 shadow-md group-hover:shadow-xl transition">
-
-        {/* Flair badge */}
+      <div className="relative bg-white p-5 rounded-2xl border-2 border-purple-200 shadow-md group-hover:shadow-xl transition overflow-hidden">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div className="relative">
         <div className="flex justify-between items-start mb-3">
           <span className="text-xs px-3 py-1 rounded-full bg-purple-100 text-purple-700 border border-purple-300 font-medium">
             {idea.flair}
