@@ -108,7 +108,7 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="text-white p-6">Loading...</div>
+      <div className="text-gray-900 p-6">Loading...</div>
     );
   }
 
@@ -116,31 +116,31 @@ export default function ProfilePage() {
     <>
       <Navbar />
 
-      <div className="min-h-[calc(100vh-80px)] bg-black text-white px-6 py-10 space-y-8">
-        <div className="max-w-4xl mx-auto bg-[#111827] rounded-2xl border border-gray-800 p-6">
-          <h1 className="text-2xl font-bold">{userLabel}</h1>
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-300">
+      <div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-white via-purple-50 to-purple-100 text-gray-900 px-6 py-10 space-y-8">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl border-2 border-purple-200 shadow-lg p-6">
+          <h1 className="text-2xl font-bold text-gray-900">{userLabel}</h1>
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
             <div>
-              <span className="text-gray-500">Roll</span>
-              <div className="text-white font-medium">
+              <span className="text-gray-500 text-sm">Roll</span>
+              <div className="text-gray-900 font-medium">
                 {user.roll || "-"}
               </div>
             </div>
             <div>
-              <span className="text-gray-500">Department</span>
-              <div className="text-white font-medium">
+              <span className="text-gray-500 text-sm">Department</span>
+              <div className="text-gray-900 font-medium">
                 {user.department || "-"}
               </div>
             </div>
             <div>
-              <span className="text-gray-500">Degree</span>
-              <div className="text-white font-medium">
+              <span className="text-gray-500 text-sm">Degree</span>
+              <div className="text-gray-900 font-medium">
                 {user.degree || "-"}
               </div>
             </div>
             <div>
-              <span className="text-gray-500">Passing Year</span>
-              <div className="text-white font-medium">
+              <span className="text-gray-500 text-sm">Passing Year</span>
+              <div className="text-gray-900 font-medium">
                 {user.passing_year || "-"}
               </div>
             </div>
@@ -148,18 +148,18 @@ export default function ProfilePage() {
         </div>
 
         <div className="max-w-6xl mx-auto space-y-4">
-          <h2 className="text-xl font-semibold">Your Ideas</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Your Ideas</h2>
 
           {status === "loading" && (
-            <div className="text-gray-400">Loading your ideas...</div>
+            <div className="text-gray-600">Loading your ideas...</div>
           )}
 
           {status === "error" && (
-            <div className="text-red-400">Could not load ideas.</div>
+            <div className="text-red-600">Could not load ideas.</div>
           )}
 
           {status === "ready" && ideas.length === 0 && (
-            <div className="text-gray-400">No ideas yet.</div>
+            <div className="text-gray-600">No ideas yet.</div>
           )}
 
           {status === "ready" && ideas.length > 0 && (
@@ -173,7 +173,7 @@ export default function ProfilePage() {
                       handleTogglePrivacy(idea.id, !idea.isPrivate)
                     }
                     disabled={updatingId === idea.id}
-                    className="w-full rounded-xl border my-4 border-blue-500/40 text-sm py-2 text-blue-300 hover:bg-blue-500/10 disabled:opacity-50"
+                    className="w-full rounded-xl border-2 border-purple-400 my-4 text-sm py-2 text-purple-600 font-medium hover:bg-purple-50 disabled:opacity-50 transition"
                   >
                     {idea.isPrivate ? "Make Public" : "Make Private"}
                   </button>

@@ -15,11 +15,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full sm:flex sm:items-center sm:justify-between bg-[#011c41] text-white px-4 sm:px-6 py-4 shadow-md">
+    <nav className="w-full sm:flex sm:items-center sm:justify-between bg-white text-gray-900 px-4 sm:px-6 py-4 shadow-lg border-b-2 border-purple-400">
 
       <div className="flex items-center justify-between gap-4">
         {/* Title */}
-        <h1 className="text-2xl sm:text-4xl font-semibold tracking-wide poppins-black">
+        <h1 className="text-2xl sm:text-4xl font-semibold tracking-wide poppins-black bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
           ITSP Team Making
         </h1>
 
@@ -27,7 +27,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10"
+          className="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-purple-100"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
@@ -53,17 +53,17 @@ export default function Navbar() {
       {/* Desktop Navigation */}
       <div className="hidden sm:flex gap-6 text-xl items-center">
 
-        <Link href="/" className="hover:text-blue-400 transition">
+        <Link href="/" className="text-gray-700 hover:text-purple-600 font-medium transition">
           Home
         </Link>
 
-        <Link href="/profile" className="hover:text-blue-400 transition">
+        <Link href="/profile" className="text-gray-700 hover:text-purple-600 font-medium transition">
           Profile
         </Link>
 
         {/* Add Idea */}
         <Link href={user ? "/add" : "/login"}>
-          <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
+          <div className="bg-gradient-to-r from-purple-600 to-purple-500 flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer text-white border border-purple-600 hover:border-purple-700">
             Add Your Own Idea
           </div>
         </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Login / Logout */}
         {!user ? (
           <Link href="/login">
-            <button className="bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+            <button className="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition text-white font-medium">
               Login
             </button>
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
               localStorage.removeItem("user");
               window.location.reload();
             }}
-            className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
+            className="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition text-white font-medium"
           >
             Logout
           </button>
@@ -93,11 +93,11 @@ export default function Navbar() {
       {menuOpen && (
         <div
           id="mobile-nav"
-          className="sm:hidden mt-4 flex flex-col gap-4 text-base rounded-xl bg-white/5 p-4"
+          className="sm:hidden mt-4 flex flex-col gap-4 text-base rounded-xl bg-purple-100/50 p-4"
         >
           <Link
             href="/"
-            className="hover:text-blue-400 transition"
+            className="text-gray-700 hover:text-purple-600 font-medium transition"
             onClick={() => setMenuOpen(false)}
           >
             Home
@@ -105,7 +105,7 @@ export default function Navbar() {
 
           <Link
             href="/profile"
-            className="hover:text-blue-400 transition"
+            className="text-gray-700 hover:text-purple-600 font-medium transition"
             onClick={() => setMenuOpen(false)}
           >
             Profile
@@ -115,14 +115,14 @@ export default function Navbar() {
             href={user ? "/add" : "/login"}
             onClick={() => setMenuOpen(false)}
           >
-            <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
+            <div className="bg-gradient-to-r from-purple-600 to-purple-500 flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-purple-600 text-white">
               Add Your Own Idea
             </div>
           </Link>
 
           {!user ? (
             <Link href="/login" onClick={() => setMenuOpen(false)}>
-              <button className="w-full bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+              <button className="w-full bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition text-white font-medium">
                 Login
               </button>
             </Link>
@@ -132,7 +132,7 @@ export default function Navbar() {
                 localStorage.removeItem("user");
                 window.location.reload();
               }}
-              className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
+              className="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition text-white font-medium"
             >
               Logout
             </button>
