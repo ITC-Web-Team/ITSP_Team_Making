@@ -4,26 +4,39 @@ export async function GET(req) {
   try {
     const url = new URL(req.url);
     const idParam = url.searchParams.get("id");
+    const userParam = url.searchParams.get("user");
 
-    if (!idParam) {
-      return Response.json({ error: "Missing id" }, { status: 400 });
+    if (idParam) {
+      const id = Number.parseInt(idParam, 10);
+
+      if (Number.isNaN(id)) {
+        return Response.json({ error: "Invalid id" }, { status: 400 });
+      }
+
+      const idea = await prisma.idea.findUnique({
+        where: { id },
+      });
+
+      if (!idea) {
+        return Response.json({ error: "Idea not found" }, { status: 404 });
+      }
+
+      return Response.json(idea);
     }
 
-    const id = Number.parseInt(idParam, 10);
+    if (userParam) {
+      const ideas = await prisma.idea.findMany({
+        where: { userLdap: userParam },
+        orderBy: { createdAt: "desc" },
+      });
 
-    if (Number.isNaN(id)) {
-      return Response.json({ error: "Invalid id" }, { status: 400 });
+      return Response.json(ideas);
     }
 
-    const idea = await prisma.idea.findUnique({
-      where: { id },
-    });
-
-    if (!idea) {
-      return Response.json({ error: "Idea not found" }, { status: 404 });
-    }
-
-    return Response.json(idea);
+    return Response.json(
+      { error: "Missing id or user" },
+      { status: 400 }
+    );
   } catch (err) {
     console.error("ERROR:", err);
     return Response.json(
