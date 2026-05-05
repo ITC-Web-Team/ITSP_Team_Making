@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full bg-[#011c41] flex text-white px-4 sm:px-6 py-4 shadow-md">
+    <nav className="w-full bg-[#011c41] sm:flex sm:items-center sm:justify-between text-white px-4 sm:px-6 py-4 shadow-md">
 
       <div className="flex items-center justify-between gap-4">
         {/* Title */}
