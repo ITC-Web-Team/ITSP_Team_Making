@@ -1,7 +1,8 @@
-import { prisma } from "@/lib/prisma";
-import Navbar from "@/components/Navbar";
+"use client";
 
-export const dynamic = "force-dynamic";
+import { useEffect, useMemo, useState } from "react";
+import { useParams } from "next/navigation";
+import Navbar from "@/components/Navbar";
 
 function renderMessage(title, message) {
 	return (
@@ -14,13 +15,51 @@ function renderMessage(title, message) {
 	);
 }
 
-export default async function IdeaPage({ params }) {
-	const rawId = params?.id ? String(params.id) : "";
-	const id = Number.parseInt(rawId, 10);
+export default function IdeaPage() {
+	const params = useParams();
+	const rawId = useMemo(() => {
+		if (!params?.id) return "";
+		if (Array.isArray(params.id)) return params.id[0] || "";
+		return String(params.id);
+	}, [params]);
 
-	let idea = null;
+	const [idea, setIdea] = useState(null);
+	const [status, setStatus] = useState("idle");
 
-	if (!rawId || Number.isNaN(id)) {
+	useEffect(() => {
+		if (!rawId) return;
+
+		let active = true;
+
+		async function loadIdea() {
+			setStatus("loading");
+			try {
+				const res = await fetch(`/api/ideas?id=${encodeURIComponent(rawId)}`);
+				const data = await res.json();
+
+				if (!active) return;
+
+				if (!res.ok) {
+					setStatus(res.status === 404 ? "not-found" : "error");
+					return;
+				}
+
+				setIdea(data);
+				setStatus("ready");
+			} catch (error) {
+				if (!active) return;
+				setStatus("error");
+			}
+		}
+
+		loadIdea();
+
+		return () => {
+			active = false;
+		};
+	}, [rawId]);
+
+	if (!rawId) {
 		return (
 			<>
 				<Navbar />
@@ -29,11 +68,25 @@ export default async function IdeaPage({ params }) {
 		);
 	}
 
-	try {
-		idea = await prisma.idea.findUnique({
-			where: { id },
-		});
-	} catch (error) {
+	if (status === "loading" || status === "idle") {
+		return (
+			<>
+				<Navbar />
+				{renderMessage("Loading", "Fetching idea details...")}
+			</>
+		);
+	}
+
+	if (status === "not-found") {
+		return (
+			<>
+				<Navbar />
+				{renderMessage("Idea not found", "This idea does not exist.")}
+			</>
+		);
+	}
+
+	if (status === "error") {
 		return (
 			<>
 				<Navbar />
@@ -49,7 +102,10 @@ export default async function IdeaPage({ params }) {
 		return (
 			<>
 				<Navbar />
-				{renderMessage("Idea not found", "This idea does not exist.")}
+				{renderMessage(
+					"Something went wrong",
+					"We could not load this idea right now. Please try again later."
+				)}
 			</>
 		);
 	}
