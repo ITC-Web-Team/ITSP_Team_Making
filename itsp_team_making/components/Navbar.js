@@ -53,17 +53,17 @@ export default function Navbar() {
       {/* Desktop Navigation */}
       <div className="hidden sm:flex gap-6 text-xl items-center">
 
-        <Link href="/" className="hover:text-blue-400 transition">
+        <Link href="/" className="hover:text-purple-400 transition">
           Home
         </Link>
 
-        <Link href="/profile" className="hover:text-blue-400 transition">
+        <Link href="/profile" className="hover:text-purple-400 transition">
           Profile
         </Link>
 
         {/* Add Idea */}
         <Link href={user ? "/add" : "/login"}>
-          <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
+          <div className="bg-purple-600 flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
             Add Your Own Idea
           </div>
         </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Login / Logout */}
         {!user ? (
           <Link href="/login">
-            <button className="bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+            <button className="bg-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
               Login
             </button>
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
               localStorage.removeItem("user");
               window.location.reload();
             }}
-            className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
+            className="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition"
           >
             Logout
           </button>
@@ -115,14 +115,14 @@ export default function Navbar() {
             href={user ? "/add" : "/login"}
             onClick={() => setMenuOpen(false)}
           >
-            <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
+            <div className="bg-purple-600 flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
               Add Your Own Idea
             </div>
           </Link>
 
           {!user ? (
             <Link href="/login" onClick={() => setMenuOpen(false)}>
-              <button className="w-full bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+              <button className="w-full bg-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
                 Login
               </button>
             </Link>
@@ -132,7 +132,7 @@ export default function Navbar() {
                 localStorage.removeItem("user");
                 window.location.reload();
               }}
-              className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
+              className="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-700 transition"
             >
               Logout
             </button>
