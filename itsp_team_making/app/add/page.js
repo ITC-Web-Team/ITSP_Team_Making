@@ -28,7 +28,7 @@ export default function AddIdeaPage() {
     // optional prefill
     setForm((prev) => ({
       ...prev,
-      contact: user.roll || "",
+      contact:"",
     }));
 
     setLoading(false);
