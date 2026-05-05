@@ -6,7 +6,7 @@ export default function IdeaCard({ idea }) {
     return null;
   }
 
-  return (<div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+  return (<div className=" bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
   <Link href={`/ideas/${encodeURIComponent(ideaId)}`}>
     <div className="group relative bg-[#0b0f1a] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300">
       
