@@ -15,8 +15,8 @@ function renderMessage(title, message) {
 }
 
 export default async function IdeaPage({ params }) {
-	const rawId = params?.id;
-	const id = Number(rawId);
+	const rawId = params?.id ? String(params.id) : "";
+	const id = Number.parseInt(rawId, 10);
 
 	let idea = null;
 
