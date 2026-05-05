@@ -19,6 +19,6 @@ model Idea {
   userLdap  String
   text      String
   flair     String
-  contact   String
+  contact   Int
   isPrivate Boolean
 }
