@@ -173,7 +173,7 @@ export default function ProfilePage() {
                       handleTogglePrivacy(idea.id, !idea.isPrivate)
                     }
                     disabled={updatingId === idea.id}
-                    className="w-full rounded-xl border border-blue-500/40 text-sm py-2 text-blue-300 hover:bg-blue-500/10 disabled:opacity-50"
+                    className="w-full rounded-xl border my-4 border-blue-500/40 text-sm py-2 text-blue-300 hover:bg-blue-500/10 disabled:opacity-50"
                   >
                     {idea.isPrivate ? "Make Public" : "Make Private"}
                   </button>
