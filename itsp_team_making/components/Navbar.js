@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full bg-[#011c41] text-white px-6 py-4 shadow-md">
+    <nav className="w-full bg-[#011c41] text-white px-4 sm:px-6 py-4 shadow-md">
 
       <div className="flex items-center justify-between">
         {/* Title */}
@@ -27,9 +27,10 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10"
+          className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
         >
           <svg
             className="h-6 w-6"
@@ -50,7 +51,7 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden sm:flex gap-6 text-xl items-center">
+      <div className="hidden md:flex gap-6 text-xl items-center">
 
         <Link href="/" className="hover:text-blue-400 transition">
           Home
@@ -90,7 +91,10 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <div className="sm:hidden mt-4 flex flex-col gap-4 text-base">
+        <div
+          id="mobile-nav"
+          className="md:hidden mt-4 flex flex-col gap-4 text-base rounded-xl bg-white/5 p-4"
+        >
           <Link
             href="/"
             className="hover:text-blue-400 transition"
