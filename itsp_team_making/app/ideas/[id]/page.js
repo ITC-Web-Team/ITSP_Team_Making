@@ -126,17 +126,19 @@ export default function IdeaPage() {
 						</span>
 					</div>
 
-					<h1 className="text-3xl font-bold leading-tight">{idea.title}</h1>
+					<h1 className="text-3xl font-bold leading-tight break-words">
+						{idea.title}
+					</h1>
 
-					<p className="text-gray-300 text-base leading-relaxed">
+					<p className="text-gray-300 text-base leading-relaxed break-words whitespace-pre-wrap">
 						{idea.text}
 					</p>
 
 					<div className="border-t border-gray-800"></div>
 
 					<div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm text-gray-400">
-						<span>Posted by: {idea.userLdap}</span>
-						<span>Contact: {idea.contact}</span>
+						<span className="break-words">Posted by: {idea.userLdap}</span>
+						<span className="break-words">Contact: {idea.contact}</span>
 					</div>
 				</div>
 			</div>

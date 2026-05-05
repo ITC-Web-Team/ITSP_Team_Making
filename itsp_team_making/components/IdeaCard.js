@@ -27,12 +27,12 @@ export default function IdeaCard({ idea }) {
         </div>
 
         {/* Title */}
-        <h2 className="text-lg font-semibold text-white group-hover:text-blue-400 transition">
+        <h2 className="text-lg font-semibold text-white group-hover:text-blue-400 transition break-words">
           {idea.title}
         </h2>
 
         {/* Description */}
-        <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3 overflow-hidden">
           {idea.text}
         </p>
 

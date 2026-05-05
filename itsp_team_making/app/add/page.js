@@ -101,14 +101,22 @@ export default function AddIdeaPage() {
           }
         />
 
-        <input
-          placeholder="Flair"
+        <select
           value={form.flair}
-          className="w-full p-2 rounded bg-black border border-gray-700"
+          className="w-full p-2 rounded bg-black border border-gray-700 text-white"
           onChange={(e) =>
             setForm({ ...form, flair: e.target.value })
           }
-        />
+        >
+          <option value="" disabled>
+            Select flair
+          </option>
+          <option value="AI/ML">AI/ML</option>
+          <option value="Robotics">Robotics</option>
+          <option value="Aviation">Aviation</option>
+          <option value="Transport">Transport</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+        </select>
 
         <input
           placeholder="Contact"
