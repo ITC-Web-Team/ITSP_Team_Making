@@ -6,10 +6,13 @@ import Navbar from "@/components/Navbar";
 
 function renderMessage(title, message) {
 	return (
-		<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-white via-purple-50 to-purple-100 text-gray-900 flex justify-center px-4 py-10">
-			<div className="w-full max-w-2xl bg-white border-2 border-purple-200 rounded-2xl shadow-xl p-6 space-y-4">
-				<h1 className="text-2xl font-bold text-gray-900">{title}</h1>
-				<p className="text-gray-600">{message}</p>
+		<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-white via-purple-50 to-purple-100 text-gray-900 flex justify-center items-start px-4 py-10">
+			<div className="w-full max-w-2xl bg-white border-2 border-purple-200 rounded-2xl shadow-xl p-6 space-y-4 self-start relative overflow-hidden">
+				<div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle,rgba(167,139,250,0.35)_1px,transparent_1px)] [background-size:16px_16px]"></div>
+					<div className="relative z-10">
+					<h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+					<p className="text-gray-600">{message}</p>
+				</div>
 			</div>
 		</div>
 	);
@@ -114,10 +117,10 @@ export default function IdeaPage() {
 		<>
 			<Navbar />
 
-			<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-white via-purple-50 to-purple-100 text-gray-900 flex justify-center px-4 py-10">
-				<div className="w-full max-w-2xl bg-white border-2 border-purple-200 rounded-2xl shadow-xl p-6 space-y-5 relative overflow-hidden">
-					<div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-					<div className="relative">
+			<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-white via-purple-50 to-purple-100 text-gray-900 flex justify-center items-start px-4 py-10">
+				<div className="w-full max-w-2xl bg-white border-2 border-purple-200 rounded-2xl shadow-xl p-6 space-y-5 relative overflow-hidden self-start">
+					<div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle,#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+					<div className="relative z-10">
 						<div className="flex justify-between items-start">
 							<span className="px-3 py-1 text-xs rounded-full bg-purple-100 text-purple-700 border border-purple-300 font-medium">
 								{idea.flair}
@@ -138,7 +141,7 @@ export default function IdeaPage() {
 
 						<div className="border-t-2 border-purple-200"></div>
 
-						<div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm text-gray-600">
+						<div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm text-gray-600 mt-4">
 							<span className="break-words">Posted by: {idea.userLdap}</span>
 							<span className="break-words">Contact: {idea.contact}</span>
 						</div>
