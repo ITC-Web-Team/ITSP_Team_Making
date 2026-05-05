@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState(null);
   const [ideas, setIdeas] = useState([]);
   const [status, setStatus] = useState("loading");
+  const [updatingId, setUpdatingId] = useState(null);
 
   const userLabel = useMemo(() => {
     if (!user) return "";
@@ -67,6 +68,43 @@ export default function ProfilePage() {
       active = false;
     };
   }, [user]);
+
+  async function handleTogglePrivacy(ideaId, nextPrivate) {
+    if (!user?.roll) return;
+
+    setUpdatingId(ideaId);
+
+    try {
+      const res = await fetch("/api/ideas", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: ideaId,
+          isPrivate: nextPrivate,
+          user,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setStatus("error");
+        return;
+      }
+
+      setIdeas((prev) =>
+        prev.map((idea) =>
+          idea.id === data.id ? { ...idea, isPrivate: data.isPrivate } : idea
+        )
+      );
+    } catch (error) {
+      setStatus("error");
+    } finally {
+      setUpdatingId(null);
+    }
+  }
 
   if (!user) {
     return (
@@ -127,7 +165,19 @@ export default function ProfilePage() {
           {status === "ready" && ideas.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {ideas.map((idea) => (
-                <IdeaCard key={idea.id} idea={idea} />
+                <div key={idea.id} className="space-y-3">
+                  <IdeaCard idea={idea} />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleTogglePrivacy(idea.id, !idea.isPrivate)
+                    }
+                    disabled={updatingId === idea.id}
+                    className="w-full rounded-xl border border-blue-500/40 text-sm py-2 text-blue-300 hover:bg-blue-500/10 disabled:opacity-50"
+                  >
+                    {idea.isPrivate ? "Make Public" : "Make Private"}
+                  </button>
+                </div>
               ))}
             </div>
           )}

@@ -79,3 +79,40 @@ export async function POST(req) {
     );
   }
 }
+
+export async function PATCH(req) {
+  try {
+    const body = await req.json();
+
+    if (!body || !body.user || !body.user.roll) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const id = Number.parseInt(String(body.id), 10);
+
+    if (Number.isNaN(id)) {
+      return Response.json({ error: "Invalid id" }, { status: 400 });
+    }
+
+    const updated = await prisma.idea.updateMany({
+      where: { id, userLdap: body.user.roll },
+      data: { isPrivate: Boolean(body.isPrivate) },
+    });
+
+    if (updated.count === 0) {
+      return Response.json({ error: "Idea not found" }, { status: 404 });
+    }
+
+    const idea = await prisma.idea.findUnique({
+      where: { id },
+    });
+
+    return Response.json(idea);
+  } catch (err) {
+    console.error("ERROR:", err);
+    return Response.json(
+      { error: err.message || "Server error" },
+      { status: 500 }
+    );
+  }
+}

@@ -6,6 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const ideas = await prisma.idea.findMany({
+    where: { isPrivate: false },
     orderBy: { createdAt: "desc" },
   });
 
