@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full bg-[#0b0f1a]/90 backdrop-blur border-b border-white/10 sm:flex sm:items-center sm:justify-between text-white px-4 sm:px-6 py-4 shadow-md">
+    <nav className="w-full bg-[#011c41] text-white px-4 sm:px-6 py-4 shadow-md">
 
       <div className="flex items-center justify-between gap-4">
         {/* Title */}
@@ -53,17 +53,17 @@ export default function Navbar() {
       {/* Desktop Navigation */}
       <div className="hidden sm:flex gap-6 text-xl items-center">
 
-        <Link href="/" className="hover:text-fuchsia-300 transition">
+        <Link href="/" className="hover:text-blue-400 transition">
           Home
         </Link>
 
-        <Link href="/profile" className="hover:text-fuchsia-300 transition">
+        <Link href="/profile" className="hover:text-blue-400 transition">
           Profile
         </Link>
 
         {/* Add Idea */}
         <Link href={user ? "/add" : "/login"}>
-          <div className="bg-[#0f172a] flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-white/10 hover:border-fuchsia-300/60">
+          <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
             Add Your Own Idea
           </div>
         </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Login / Logout */}
         {!user ? (
           <Link href="/login">
-            <button className="bg-fuchsia-600 px-4 py-2 rounded-xl hover:bg-fuchsia-500 transition">
+            <button className="bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
               Login
             </button>
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
               localStorage.removeItem("user");
               window.location.reload();
             }}
-            className="bg-rose-600 px-4 py-2 rounded-xl hover:bg-rose-500 transition"
+            className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
           >
             Logout
           </button>
@@ -97,7 +97,7 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="hover:text-fuchsia-300 transition"
+            className="hover:text-blue-400 transition"
             onClick={() => setMenuOpen(false)}
           >
             Home
@@ -105,7 +105,7 @@ export default function Navbar() {
 
           <Link
             href="/profile"
-            className="hover:text-fuchsia-300 transition"
+            className="hover:text-blue-400 transition"
             onClick={() => setMenuOpen(false)}
           >
             Profile
@@ -115,14 +115,14 @@ export default function Navbar() {
             href={user ? "/add" : "/login"}
             onClick={() => setMenuOpen(false)}
           >
-            <div className="bg-[#0f172a] flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-white/10 hover:border-fuchsia-300/60">
+            <div className="bg-black flex items-center py-2 px-4 rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-white">
               Add Your Own Idea
             </div>
           </Link>
 
           {!user ? (
             <Link href="/login" onClick={() => setMenuOpen(false)}>
-              <button className="w-full bg-fuchsia-600 px-4 py-2 rounded-xl hover:bg-fuchsia-500 transition">
+              <button className="w-full bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 transition">
                 Login
               </button>
             </Link>
@@ -132,7 +132,7 @@ export default function Navbar() {
                 localStorage.removeItem("user");
                 window.location.reload();
               }}
-              className="bg-rose-600 px-4 py-2 rounded-xl hover:bg-rose-500 transition"
+              className="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition"
             >
               Logout
             </button>

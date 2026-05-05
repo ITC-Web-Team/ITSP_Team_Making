@@ -6,16 +6,14 @@ export default function IdeaCard({ idea }) {
     return null;
   }
 
-  return (
-    <Link href={`/ideas/${encodeURIComponent(ideaId)}`}>
-      <div className="group relative bg-[#0b0f1a] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300 overflow-hidden">
-        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]" />
+  return (<div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+  <Link href={`/ideas/${encodeURIComponent(ideaId)}`}>
+    <div className="group relative bg-[#0b0f1a] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300">
+      
+      {/* gradient border */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/40 to-purple-500/40 opacity-0 group-hover:opacity-100 blur-sm transition"></div>
 
-        {/* gradient border */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/40 to-purple-500/40 opacity-0 group-hover:opacity-100 blur-sm transition"></div>
-
-        <div className="relative bg-[#111827] p-5 rounded-2xl border border-gray-800 shadow-md group-hover:shadow-xl transition">
+      <div className="relative bg-[#111827] p-5 rounded-2xl border border-gray-800 shadow-md group-hover:shadow-xl transition">
 
         {/* Flair badge */}
         <div className="flex justify-between items-start mb-3">
@@ -44,8 +42,9 @@ export default function IdeaCard({ idea }) {
           <span>{idea.isPrivate ? "Private 🔒" : "Public 🌍"}</span>
         </div>
 
-        </div>
       </div>
+    </div>
     </Link>
+    </div>
   );
 }
