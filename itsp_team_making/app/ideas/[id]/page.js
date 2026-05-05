@@ -118,7 +118,7 @@ export default function IdeaPage() {
 				<div className="w-full max-w-2xl bg-[#111827]/80 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl p-6 space-y-5">
 					<div className=" bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
 					<div className="flex justify-between items-start">
-						<span className="px-3 py-1 text-xs rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30">
+						<span className="px-3 py-1 text-xs rounded-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] text-white border border-black/30">
 							{idea.flair}
 						</span>
 

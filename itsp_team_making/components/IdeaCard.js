@@ -6,9 +6,9 @@ export default function IdeaCard({ idea }) {
     return null;
   }
 
-  return (<div className=" bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+  return (
   <Link href={`/ideas/${encodeURIComponent(ideaId)}`}>
-    <div className="group relative bg-[#0b0f1a] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300">
+    <div className="group relative  bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] rounded-2xl p-[1px] hover:scale-[1.02] transition-all duration-300">
       
       {/* gradient border */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/40 to-purple-500/40 opacity-0 group-hover:opacity-100 blur-sm transition"></div>
@@ -45,6 +45,5 @@ export default function IdeaCard({ idea }) {
       </div>
     </div>
     </Link>
-    </div>
   );
 }
