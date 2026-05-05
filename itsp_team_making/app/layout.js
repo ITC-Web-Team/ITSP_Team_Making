@@ -22,11 +22,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-    >
-      <body className={`${poppins.className} min-h-full flex flex-col`}>
+    <html lang="en" className="h-full antialiased">
+      <body className={`${poppins.className} min-h-full flex flex-col relative`}>
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]" />
         {children}
       </body>
     </html>
