@@ -41,7 +41,7 @@ export default function IdeaCard({ idea }) {
           <span>Contact: {idea.contact}</span>
           <span>{idea.isPrivate ? "Private 🔒" : "Public 🌍"}</span>
         </div>
-
+        </div>
       </div>
     </div>
     </Link>
