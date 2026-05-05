@@ -16,7 +16,7 @@ export default function IdeaCard({ idea }) {
           </span>
 
           <span className="text-xs text-gray-500">
-            {idea.user_LDAP}
+            {idea.userLdap}
           </span>
         </div>
 
@@ -32,8 +32,8 @@ export default function IdeaCard({ idea }) {
 
         {/* Footer */}
         <div className="mt-4 flex justify-between items-center text-xs text-gray-500">
-          <span>Contact: {idea.Contact}</span>
-          <span>{idea.Private ? "Private 🔒" : "Public 🌍"}</span>
+          <span>Contact: {idea.contact}</span>
+          <span>{idea.isPrivate ? "Private 🔒" : "Public 🌍"}</span>
         </div>
 
       </div>

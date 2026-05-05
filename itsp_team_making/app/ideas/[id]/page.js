@@ -30,7 +30,7 @@ export default async function IdeaPage({ params }) {
             </span>
 
             <span className="text-sm text-gray-400">
-              {idea.Private ? "Private" : "Public"}
+              {idea.isPrivate ? "Private" : "Public"}
             </span>
           </div>
 
@@ -49,8 +49,8 @@ export default async function IdeaPage({ params }) {
 
           {/* Footer */}
           <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm text-gray-400">
-            <span>Posted by: {idea.user_LDAP}</span>
-            <span>Contact: {idea.Contact}</span>
+            <span>Posted by: {idea.userLdap}</span>
+            <span>Contact: {idea.contact}</span>
           </div>
 
         </div>
